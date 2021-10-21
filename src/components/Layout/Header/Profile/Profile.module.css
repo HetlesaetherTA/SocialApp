@@ -1,0 +1,19 @@
+.profile {
+  height: 60px;
+  width: 60px;
+  border: none;
+  border-radius: 50%;
+}
+
+.profile_overlay:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.233);
+}
+
+.profile_overlay {
+  border-radius: 50%;
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  z-index: 1;
+}

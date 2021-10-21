@@ -1,0 +1,18 @@
+.create_post__button {
+    background-color: rgb(15,123,176);
+    border: none;
+    height: 3.125rem;
+    width: 9.375rem;
+    box-shadow: 0px 0px 3px rgb(15,123,176);
+}
+
+.create_post__button span {
+    font-weight: 700;
+    font-size: 1.05rem;
+    font-family: inherit;
+}
+
+.create_post__button:hover {
+    cursor: pointer;
+    background-color: rgb(13, 97, 139);
+}

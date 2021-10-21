@@ -1,0 +1,7 @@
+.card {
+    background-color: white;
+    position: absolute;
+    min-width: 60%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
