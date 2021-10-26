@@ -1,8 +1,8 @@
 import styles from "./CreatePost.module.css"
 
-const CreatePost = () => {
+const CreatePost = (props) => {
   return (
-    <button className={styles.create_post__button}>
+    <button onClick={props.onCreatePostClick} className={styles.create_post__button}>
       <span>Create Post</span>
     </button>
   );

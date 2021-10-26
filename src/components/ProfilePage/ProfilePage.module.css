@@ -1,0 +1,57 @@
+.profile_page {
+    display: flex;
+    flex-direction: column;
+}
+
+.overlay{
+    top: 8px;
+    left: 10px;
+    z-index: 50;
+    position: absolute;
+    cursor: pointer;
+    height: 48px;
+    width: 48px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.icon {
+    height: 24px;
+    width: 24px;
+    fill:rgba(0, 0, 0, 0.7);
+}
+
+.background_img {
+    position: relative;
+    background-repeat: no-repeat;
+    top: -2px;
+    height: 300px;
+    width: 100%;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    z-index: 10;
+    user-select: none;
+}
+
+.profile_img {
+    user-select: none;
+    border-bottom: black solid 1px;
+    position: relative;
+    align-self: center;
+    height: 128px;
+    width: 128px;
+    top: -64px;
+    border-radius: 50%;
+    z-index: 20;
+}
+
+.post_history {
+    text-align: center;
+}

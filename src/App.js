@@ -1,30 +1,65 @@
+import React, { useContext, useState } from "react";
 import styles from "./App.module.css";
-import Header from "./components/Layout/Header/Header"
-import Posts from "./components/Posts/Posts"
-import Modal from "./UI/Modal/Modal";
+import Header from "./components/Layout/Header/Header";
+import CreatePostPage from "./components/CreatePostPage/CreatePostPage";
+import Posts from "./components/Posts/Posts";
+import ProfilePage from "./components/ProfilePage/ProfilePage";
+import PostProvider from "./store/PostProvider";
+import PostContext from "./store/post-context";
 
-const DEFAULT_POSTS = [
-  {
-    id: 1,
-    message: "Today was a good day!",
-    comments: 3,
-    likes: 8,
-  },
-  {
-    id: 2,
-    message: "Happy birthday Snoop Dawg O G-G",
-    comments: 723,
-    likes: 1769,
-  },
-]
+// Remove TEST
+function App(props) {
+  // STATIC USER ID FOR PRODUCTION
+  const user_id = 1;
+  // STATIC USER ID FOR PRODUCTION   
+  const postCtx = useContext(PostContext)
 
-function App() {
+  const [showProfile, setShowProfile] = useState(false);
+  const [showCreatePost, setShowCreatePost] = useState(false);
+
+  const toggleShowProfileHandler = () => {
+    if (showProfile === false) {
+      setShowProfile(true);
+    } else {
+      setShowProfile(false);
+    }
+  };
+
+  const toggleShowCreatePostHandler = () => {
+    if (showCreatePost === false) {
+      setShowCreatePost(true);
+    } else {
+      setShowCreatePost(false);
+    }
+  };
+
+  let classes;
+
+  if (showProfile || showCreatePost) {
+    classes = styles.noScroll;
+  }
+
+  const addPostHandler = (message, date) => {
+    postCtx.addPost({
+      poser_id: user_id,
+      message: message,
+      id: Math.floor(Math.random() * 2**16),
+      likes: 0,
+      comments: [],
+      date: date
+    })
+    setShowCreatePost(false)
+  }
+
   return (
-    <body className={styles.app}>
-      <Modal/>
-      <Header />
-      <Posts />
-    </body>
+    <PostProvider>
+      {showProfile && <ProfilePage onToggleProfile={toggleShowProfileHandler}/>}
+      {showCreatePost && <CreatePostPage onSubmitPost={addPostHandler} onToggleCreatePost={toggleShowCreatePostHandler}/>}
+      <div className={classes}>
+        <Header onToggleProfile={toggleShowProfileHandler} onToggleCreatePost={toggleShowCreatePostHandler}/>
+        <Posts />
+      </div>
+    </PostProvider>
   );
 }
 

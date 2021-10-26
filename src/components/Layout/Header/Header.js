@@ -11,13 +11,13 @@ const Header = (props) => {
   return (
     <div className={styles.header}>
       <span className={styles.profile}>
-        <Profile />
+        <Profile onProfileClick={props.onToggleProfile}/>
       </span>
       <span onClick={refreshPage} className={styles.logo}>
         <Logo/>
       </span>
       <span className={styles.create_post}>
-        <CreatePost />
+        <CreatePost onCreatePostClick={props.onToggleCreatePost}/>
       </span>
     </div>
   );
