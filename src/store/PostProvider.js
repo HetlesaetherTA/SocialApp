@@ -76,10 +76,39 @@ const defaultPosts = {
 // let emptyPost = { items: [] };
 
 const postReducer = (state, action) => {
+  let updatedItems
   if (action.type === "ADD") {
-    let updatedItems = state.items;
+    updatedItems = state.items;
     updatedItems.unshift(action.items);
     return { items: updatedItems };
+  }
+
+  if (action.type === "ADDLIKE") {
+    // Likes is defined to have a static var to revert to.
+    // Useing updatedItems reset the value at render.
+    // This gave an inital iteration of 1, any other iteration would be by 2.
+    // This is because the view show +1 while the code is saved at 0
+    // In the view, this would looke like 1+ to -1
+    let likes = action.item.likes
+
+
+    updatedItems = state.items
+
+    // Looks though updatedItems
+    for (let i = 0; i < updatedItems.length; i++) {
+      // Looks for post if id matching 
+      if (action.item.id === updatedItems[i].id) {
+        // Check if post is already liked
+        if (action.item.liked === false) {
+          likes++
+        } else if (action.item.liked === true) {
+          likes--
+        }
+        updatedItems[i].likes = likes
+        return {items: updatedItems}
+      }
+    }
+    return {items: updatedItems}
   }
   return defaultPosts;
 };
@@ -95,10 +124,11 @@ const PostProvider = (props) => {
     dispatchNewPost({ type: "ADD", items: items });
   };
 
-  const addLikeHandler = (item) => {};
+  const addLikeHandler = (item) => {
+    dispatchNewPost({ type: "ADDLIKE", item: item });
+  };
 
   const addCommentHandler = (item) => {};
-
   const postContext = {
     items: newPost.items,
     addPost: addPostHandler,

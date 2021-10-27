@@ -7,6 +7,7 @@ import styles from "./Posts.module.css";
 const Posts = (props) => {
   const postCtx = useContext(PostContext)
 
+
   const posts = (
      (
       <div>
